@@ -1,8 +1,7 @@
 ﻿using TrickBookStoreExercises.Models;
-using TrickBookStoreExercises.Services.Customers;
 using TrickBookStoreExercises.Services.Subscriptions;
 
-namespace TrickyBookStore.Services.Customers;
+namespace TrickBookStoreExercises.Services.Customers;
 
 internal class CustomerService : ICustomerService
 {
@@ -17,7 +16,7 @@ internal class CustomerService : ICustomerService
     public Customer? GetCustomerById(long id)
     {
         var searchedCustomer =
-            TrickBookStoreExercises.Services.Store.Customers.Data.FirstOrDefault(data => data.Id == id);
+            Store.Customers.Data.FirstOrDefault(data => data.Id == id);
 
         if (searchedCustomer == null)
         {
