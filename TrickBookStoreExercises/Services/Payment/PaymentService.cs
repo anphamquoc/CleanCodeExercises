@@ -1,8 +1,8 @@
-﻿using TrickyBookStore.Models;
-using TrickyBookStore.Services.Customers;
-using TrickyBookStore.Services.PurchaseTransactions;
+﻿using TrickBookStoreExercises.Models;
+using TrickBookStoreExercises.Services.Customers;
+using TrickBookStoreExercises.Services.PurchaseTransactions;
 
-namespace TrickyBookStore.Services.Payment;
+namespace TrickBookStoreExercises.Services.Payment;
 
 internal class PaymentService : IPaymentService
 {
@@ -34,8 +34,9 @@ internal class PaymentService : IPaymentService
         foreach (var subscription in foundCustomer.Subscriptions)
         {
             var subscriptionId = subscription.Id;
-            totalPaymentAmount += subscription.PriceDetails["FixPrice"];
             var subscriptionType = subscription.SubscriptionType;
+
+            totalPaymentAmount += subscription.PriceDetails["FixPrice"];
 
             switch (subscriptionType)
             {
@@ -61,7 +62,8 @@ internal class PaymentService : IPaymentService
 
             if (bookCategoryId == -1)
             {
-                Console.WriteLine($"This category subscription with id {subscriptionId} is not valid.");
+                Console.WriteLine(
+                    $"This book category subscription with subscription id {subscriptionId} is not valid.");
 
                 continue;
             }
@@ -110,7 +112,7 @@ internal class PaymentService : IPaymentService
             totalPaymentAmount += bookPrice;
         }
 
-        return totalPaymentAmount;
+        return Math.Round(totalPaymentAmount, 2);
     }
 
     private static bool CheckSubscription(IReadOnlyDictionary<int, int> remainingSubscriptions, int categoryId)
