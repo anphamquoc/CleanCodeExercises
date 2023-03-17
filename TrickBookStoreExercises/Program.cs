@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TrickyBookStore.Services.Books;
+using TrickBookStoreExercises.Services.Books;
+using TrickBookStoreExercises.Services.Customers;
+using TrickBookStoreExercises.Services.Payment;
+using TrickBookStoreExercises.Services.PurchaseTransactions;
+using TrickBookStoreExercises.Services.Subscriptions;
 using TrickyBookStore.Services.Customers;
-using TrickyBookStore.Services.Payment;
-using TrickyBookStore.Services.PurchaseTransactions;
-using TrickyBookStore.Services.Subscriptions;
 
 var services = new ServiceCollection();
 
@@ -17,6 +18,9 @@ var serviceProvider = services.BuildServiceProvider();
 
 var paymentService = serviceProvider.GetService<IPaymentService>();
 
-var paymentAmount = paymentService.GetPaymentAmount(6, 2, 2018);
+if (paymentService != null)
+{
+    var paymentAmount = paymentService.GetPaymentAmount(1, 1, 2018);
 
-Console.WriteLine(paymentAmount);
+    Console.WriteLine(paymentAmount);
+}
