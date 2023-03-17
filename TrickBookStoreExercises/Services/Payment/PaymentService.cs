@@ -1,4 +1,5 @@
-﻿using TrickyBookStore.Services.Customers;
+﻿using TrickyBookStore.Models;
+using TrickyBookStore.Services.Customers;
 using TrickyBookStore.Services.PurchaseTransactions;
 
 namespace TrickyBookStore.Services.Payment;
@@ -19,7 +20,6 @@ internal class PaymentService : IPaymentService
     {
         var totalPaymentAmount = 0.0;
         var oldBookCharge = 1.0;
-        var listBookCategory = new List<int>();
         var foundCustomer = CustomerService.GetCustomerById(customerId);
 
         if (foundCustomer == null)
@@ -35,19 +35,22 @@ internal class PaymentService : IPaymentService
         {
             var subscriptionId = subscription.Id;
             totalPaymentAmount += subscription.PriceDetails["FixPrice"];
+            var subscriptionType = subscription.SubscriptionType;
 
-            switch (subscriptionId)
+            switch (subscriptionType)
             {
-                case < 3:
+                case SubscriptionTypes.Free:
+                case SubscriptionTypes.Paid:
                     oldBookCharge = Math.Min(oldBookCharge, subscription.PriceDetails["OldBookCharge"]);
 
                     // in case of paid account
-                    if (subscriptionId == 1)
+                    if (subscriptionType == SubscriptionTypes.Paid)
                         remainingSubscriptions.Add(-1, 3);
 
                     continue;
 
-                case 3:
+                // in case of premium account
+                case SubscriptionTypes.Premium:
                     oldBookCharge = 0;
                     remainingSubscriptions.Add(0, 3);
 
@@ -63,7 +66,6 @@ internal class PaymentService : IPaymentService
                 continue;
             }
 
-            listBookCategory.Add(bookCategoryId);
             remainingSubscriptions.Add(bookCategoryId, 3);
         }
 
@@ -75,15 +77,14 @@ internal class PaymentService : IPaymentService
 
             if (isOldBook)
             {
-                if (listBookCategory.Contains(bookCategoryId)) continue;
+                if (remainingSubscriptions.ContainsKey(bookCategoryId)) continue;
 
                 totalPaymentAmount += oldBookCharge * bookPrice;
                 continue;
             }
 
             // Check and use remaining selected category subscription
-            if (remainingSubscriptions.TryGetValue(bookCategoryId, out var categorySubscriptionsLeft) &&
-                categorySubscriptionsLeft > 0)
+            if (CheckSubscription(remainingSubscriptions, bookCategoryId))
             {
                 remainingSubscriptions[bookCategoryId]--;
                 totalPaymentAmount += 0.85 * bookPrice;
@@ -91,8 +92,7 @@ internal class PaymentService : IPaymentService
             }
 
             // Check and use remaining premium subscription
-            if (remainingSubscriptions.TryGetValue(0, out var premiumSubscriptionsLeft) &&
-                premiumSubscriptionsLeft > 0)
+            if (CheckSubscription(remainingSubscriptions, 0))
             {
                 remainingSubscriptions[0]--;
                 totalPaymentAmount += 0.85 * bookPrice;
@@ -100,7 +100,7 @@ internal class PaymentService : IPaymentService
             }
 
             // Check and use remaining paid subscription
-            if (remainingSubscriptions.TryGetValue(-1, out var paidSubscriptionsLeft) && paidSubscriptionsLeft > 0)
+            if (CheckSubscription(remainingSubscriptions, -1))
             {
                 remainingSubscriptions[-1]--;
                 totalPaymentAmount += 0.95 * bookPrice;
@@ -111,5 +111,13 @@ internal class PaymentService : IPaymentService
         }
 
         return totalPaymentAmount;
+    }
+
+    private static bool CheckSubscription(IReadOnlyDictionary<int, int> remainingSubscriptions, int categoryId)
+    {
+        if (remainingSubscriptions.TryGetValue(categoryId, out var value))
+            return value != 0;
+
+        return false;
     }
 }
