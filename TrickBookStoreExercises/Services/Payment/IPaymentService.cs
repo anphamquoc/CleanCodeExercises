@@ -1,7 +1,6 @@
-﻿
+﻿// KeepIt
 
-// KeepIt
-namespace TrickyBookStore.Services.Payment;
+namespace TrickBookStoreExercises.Services.Payment;
 
 public interface IPaymentService
 {

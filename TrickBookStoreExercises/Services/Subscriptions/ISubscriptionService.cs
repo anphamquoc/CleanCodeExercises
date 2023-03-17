@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
-namespace TrickyBookStore.Services.Subscriptions
+namespace TrickBookStoreExercises.Services.Subscriptions;
+
+public interface ISubscriptionService
 {
-    public interface ISubscriptionService
-    {
-        IList<Subscription> GetSubscriptions(params int[] ids);
-    }
+    IList<Subscription> GetSubscriptions(params int[] ids);
 }

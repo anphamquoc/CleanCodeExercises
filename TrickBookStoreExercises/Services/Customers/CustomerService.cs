@@ -1,5 +1,6 @@
-﻿using TrickyBookStore.Models;
-using TrickyBookStore.Services.Subscriptions;
+﻿using TrickBookStoreExercises.Models;
+using TrickBookStoreExercises.Services.Customers;
+using TrickBookStoreExercises.Services.Subscriptions;
 
 namespace TrickyBookStore.Services.Customers;
 
@@ -15,7 +16,8 @@ internal class CustomerService : ICustomerService
 
     public Customer? GetCustomerById(long id)
     {
-        var searchedCustomer = Store.Customers.Data.FirstOrDefault(data => data.Id == id);
+        var searchedCustomer =
+            TrickBookStoreExercises.Services.Store.Customers.Data.FirstOrDefault(data => data.Id == id);
 
         if (searchedCustomer == null)
         {

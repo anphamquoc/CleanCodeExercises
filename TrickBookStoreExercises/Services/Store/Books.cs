@@ -1,12 +1,12 @@
-﻿using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
-namespace TrickyBookStore.Services.Store;
+namespace TrickBookStoreExercises.Services.Store;
 
 public static class Books
 {
     public static readonly IEnumerable<Book> Data = new List<Book>
     {
-        new() { Id = 1, CategoryId = 1, IsOld = true, Price = 34 },
+        new() { Id = 1, CategoryId = 1, IsOld = false, Price = 34 },
         new() { Id = 2, CategoryId = 2, IsOld = true, Price = 25 },
         new() { Id = 3, CategoryId = 3, IsOld = true, Price = 20 },
         new() { Id = 4, CategoryId = 4, IsOld = true, Price = 16 },

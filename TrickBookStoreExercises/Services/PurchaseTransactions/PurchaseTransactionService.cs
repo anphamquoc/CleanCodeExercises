@@ -1,7 +1,7 @@
-﻿using TrickyBookStore.Models;
-using TrickyBookStore.Services.Books;
+﻿using TrickBookStoreExercises.Models;
+using TrickBookStoreExercises.Services.Books;
 
-namespace TrickyBookStore.Services.PurchaseTransactions;
+namespace TrickBookStoreExercises.Services.PurchaseTransactions;
 
 internal class PurchaseTransactionService : IPurchaseTransactionService
 {
@@ -12,7 +12,7 @@ internal class PurchaseTransactionService : IPurchaseTransactionService
 
     private IBookService BookService { get; }
 
-    public IList<PurchaseTransaction> GetPurchaseTransactions(long customerId, int month, int year)
+    public IEnumerable<PurchaseTransaction> GetPurchaseTransactions(long customerId, int month, int year)
     {
         var foundPurchaseTransactions = new List<PurchaseTransaction>();
 

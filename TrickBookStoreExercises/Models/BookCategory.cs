@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// KeepIt
 
-// KeepIt
-namespace TrickyBookStore.Models
+namespace TrickBookStoreExercises.Models;
+
+public class BookCategory
 {
-    public class BookCategory
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-    }
+    public int Id { get; set; }
+    public string Title { get; set; }
 }

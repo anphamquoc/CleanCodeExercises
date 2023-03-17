@@ -1,7 +1,7 @@
-﻿using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
 // KeepIt
-namespace TrickyBookStore.Services.Books;
+namespace TrickBookStoreExercises.Services.Books;
 
 public interface IBookService
 {

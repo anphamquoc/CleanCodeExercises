@@ -1,32 +1,30 @@
-﻿using System.Collections.Generic;
-using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
-namespace TrickyBookStore.Services.Store
+namespace TrickBookStoreExercises.Services.Store;
+
+public static class BookCategories
 {
-    public static class BookCategories
+    public static readonly IEnumerable<BookCategory> Data = new List<BookCategory>
     {
-        public static readonly IEnumerable<BookCategory> Data = new List<BookCategory>
+        new()
         {
-            new BookCategory
-            {
-                Id = 1,
-                Title = "Programming"
-            },
-            new BookCategory
-            {
-                Id = 2,
-                Title = "Cooking"
-            },
-            new BookCategory
-            {
-                Id = 3,
-                Title = "History"
-            },
-            new BookCategory
-            {
-                Id = 4,
-                Title = "Science"
-            },
-        };
-    }
+            Id = 1,
+            Title = "Programming"
+        },
+        new()
+        {
+            Id = 2,
+            Title = "Cooking"
+        },
+        new()
+        {
+            Id = 3,
+            Title = "History"
+        },
+        new()
+        {
+            Id = 4,
+            Title = "Science"
+        }
+    };
 }

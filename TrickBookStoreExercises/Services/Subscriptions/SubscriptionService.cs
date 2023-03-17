@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
-namespace TrickyBookStore.Services.Subscriptions
+namespace TrickBookStoreExercises.Services.Subscriptions;
+
+internal class SubscriptionService : ISubscriptionService
 {
-    internal class SubscriptionService : ISubscriptionService
+    public IList<Subscription> GetSubscriptions(params int[] ids)
     {
-        public IList<Subscription> GetSubscriptions(params int[] ids)
+        var foundSubscriptions = new List<Subscription>();
+
+        foreach (var id in ids)
         {
-            var foundSubscriptions = new List<Subscription>();
+            var searchedSubscription =
+                Store.Subscriptions.Data.FirstOrDefault(data => data.Id == id);
 
-            foreach (var id in ids)
+            if (searchedSubscription == null)
             {
-                var searchedSubscription = Store.Subscriptions.Data.FirstOrDefault(data => data.Id == id);
-
-                if (searchedSubscription == null)
-                {
-                    Console.WriteLine($"Subscription with id {id} not found.");
-                    continue;
-                }
-
-                foundSubscriptions.Add(searchedSubscription);
+                Console.WriteLine($"Subscription with id {id} not found.");
+                continue;
             }
 
-            return foundSubscriptions;
+            foundSubscriptions.Add(searchedSubscription);
         }
+
+        return foundSubscriptions;
     }
 }

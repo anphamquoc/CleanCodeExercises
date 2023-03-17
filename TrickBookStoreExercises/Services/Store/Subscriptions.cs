@@ -1,6 +1,6 @@
-﻿using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
-namespace TrickyBookStore.Services.Store;
+namespace TrickBookStoreExercises.Services.Store;
 
 public static class Subscriptions
 {

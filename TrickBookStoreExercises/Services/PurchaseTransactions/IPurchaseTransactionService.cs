@@ -1,9 +1,9 @@
-﻿using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
-namespace TrickyBookStore.Services.PurchaseTransactions;
+namespace TrickBookStoreExercises.Services.PurchaseTransactions;
 
 // KeepIt
 public interface IPurchaseTransactionService
 {
-    IList<PurchaseTransaction> GetPurchaseTransactions(long customerId, int month, int year);
+    IEnumerable<PurchaseTransaction> GetPurchaseTransactions(long customerId, int month, int year);
 }

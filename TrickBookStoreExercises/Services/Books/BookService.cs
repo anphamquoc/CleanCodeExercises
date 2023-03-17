@@ -1,6 +1,6 @@
-﻿using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
-namespace TrickyBookStore.Services.Books;
+namespace TrickBookStoreExercises.Services.Books;
 
 internal class BookService : IBookService
 {
@@ -10,7 +10,8 @@ internal class BookService : IBookService
 
         foreach (var bookId in bookIds)
         {
-            var searchedBook = Store.Books.Data.FirstOrDefault(data => data.Id == bookId);
+            var searchedBook =
+                Store.Books.Data.FirstOrDefault(data => data.Id == bookId);
 
             if (searchedBook == null)
             {

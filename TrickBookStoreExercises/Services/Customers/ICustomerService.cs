@@ -1,10 +1,9 @@
-﻿using TrickyBookStore.Models;
+﻿using TrickBookStoreExercises.Models;
 
 // KeepIt
-namespace TrickyBookStore.Services.Customers
+namespace TrickBookStoreExercises.Services.Customers;
+
+public interface ICustomerService
 {
-    public interface ICustomerService
-    {
-        Customer? GetCustomerById(long id);
-    }
+    Customer? GetCustomerById(long id);
 }

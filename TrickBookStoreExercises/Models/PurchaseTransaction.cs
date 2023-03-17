@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// KeepIt
 
-// KeepIt
-namespace TrickyBookStore.Models
+namespace TrickBookStoreExercises.Models;
+
+public class PurchaseTransaction
 {
-    public class PurchaseTransaction
-    {
-        public long Id { get; set; }
-        public long CustomerId { get; set; }
-        public long BookId { get; set; }
-        public DateTimeOffset CreatedDate { get; set; }
+    public long Id { get; set; }
+    public long CustomerId { get; set; }
+    public long BookId { get; set; }
+    public DateTimeOffset CreatedDate { get; set; }
 
-        public Book Book { get; set; }
-    }
+    public Book Book { get; set; }
 }
